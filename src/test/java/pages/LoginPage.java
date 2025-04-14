@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.PropertyReader;
 
 import java.time.Duration;
 
@@ -121,6 +122,16 @@ public class LoginPage {
 
         captchaCampo.sendKeys(captcha);
         botao.click();
+    }
+
+    public void realizarLoginValido() {
+        String usuario = PropertyReader.get("usuario.valido");
+        String senha = PropertyReader.get("senha.valida");
+
+        logarComo(usuario, senha);
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.urlContains("/my_view_page.php"));
     }
 
 
